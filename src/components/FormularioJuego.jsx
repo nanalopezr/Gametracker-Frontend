@@ -3,13 +3,18 @@ import { useState } from "react";
 function FormularioJuego() {
   const [form, setForm] = useState({
     nombre: "",
-    genero: "",
     plataforma: "",
-    fechaLanzamiento: "",
+    portadaURL: "",
+    estado: "Pendiente",
+    horasJugadas: 0,
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: name === "horasJugadas" ? Number(value) : value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -27,9 +32,10 @@ function FormularioJuego() {
       alert("✅ Juego agregado con éxito");
       setForm({
         nombre: "",
-        genero: "",
         plataforma: "",
-        fechaLanzamiento: "",
+        portadaURL: "",
+        estado: "Pendiente",
+        horasJugadas: 0,
       });
     } catch (err) {
       console.error("❌ Error:", err);
@@ -46,88 +52,89 @@ function FormularioJuego() {
         gap: "12px",
       }}
     >
+      {/* Nombre */}
       <label>Nombre del juego:</label>
       <input
         type="text"
         name="nombre"
         value={form.nombre}
         onChange={handleChange}
-        placeholder="Ej: The Legend of Zelda"
+        placeholder="Ej: God of War"
         required
-        style={{
-          padding: "8px",
-          borderRadius: "5px",
-          border: "1px solid #444",
-          background: "#1e1e1e",
-          color: "#f2f2f2",
-        }}
+        style={inputStyle}
       />
 
-      <label>Género:</label>
-      <input
-        type="text"
-        name="genero"
-        value={form.genero}
-        onChange={handleChange}
-        placeholder="Ej: Aventura"
-        required
-        style={{
-          padding: "8px",
-          borderRadius: "5px",
-          border: "1px solid #444",
-          background: "#1e1e1e",
-          color: "#f2f2f2",
-        }}
-      />
-
+      {/* Plataforma */}
       <label>Plataforma:</label>
       <input
         type="text"
         name="plataforma"
         value={form.plataforma}
         onChange={handleChange}
-        placeholder="Ej: Nintendo Switch"
+        placeholder="Ej: PlayStation 5"
         required
-        style={{
-          padding: "8px",
-          borderRadius: "5px",
-          border: "1px solid #444",
-          background: "#1e1e1e",
-          color: "#f2f2f2",
-        }}
+        style={inputStyle}
       />
 
-      <label>Fecha de lanzamiento:</label>
+      {/* Portada */}
+      <label>URL de la portada:</label>
       <input
-        type="date"
-        name="fechaLanzamiento"
-        value={form.fechaLanzamiento}
+        type="url"
+        name="portadaURL"
+        value={form.portadaURL}
         onChange={handleChange}
-        required
-        style={{
-          padding: "8px",
-          borderRadius: "5px",
-          border: "1px solid #444",
-          background: "#1e1e1e",
-          color: "#f2f2f2",
-        }}
+        placeholder="https://..."
+        style={inputStyle}
       />
 
-      <button
-        type="submit"
-        style={{
-          background: "#00ADB5",
-          color: "white",
-          border: "none",
-          padding: "10px",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
+      {/* Estado */}
+      <label>Estado:</label>
+      <select
+        name="estado"
+        value={form.estado}
+        onChange={handleChange}
+        style={inputStyle}
       >
+        <option value="Pendiente">Pendiente</option>
+        <option value="Jugando">Jugando</option>
+        <option value="Completado">Completado</option>
+      </select>
+
+      {/* Horas jugadas */}
+      <label>Horas jugadas:</label>
+      <input
+        type="number"
+        name="horasJugadas"
+        value={form.horasJugadas}
+        onChange={handleChange}
+        min="0"
+        placeholder="Ej: 12"
+        style={inputStyle}
+      />
+
+      <button type="submit" style={buttonStyle}>
         Agregar Juego
       </button>
     </form>
   );
 }
+
+const inputStyle = {
+  padding: "8px",
+  borderRadius: "5px",
+  border: "1px solid #444",
+  background: "#1e1e1e",
+  color: "#f2f2f2",
+};
+
+const buttonStyle = {
+  background: "#00ADB5",
+  color: "white",
+  border: "none",
+  padding: "10px",
+  borderRadius: "5px",
+  cursor: "pointer",
+  transition: "background 0.3s",
+};
 
 export default FormularioJuego;

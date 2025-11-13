@@ -1,14 +1,6 @@
 function TarjetaJuego({ juego }) {
   return (
-    <div
-      style={{
-        background: "#1f1f1f",
-        borderRadius: "10px",
-        padding: "15px",
-        width: "200px",
-        textAlign: "center"
-      }}
-    >
+    <div className="tarjeta-juego">
       <img
         src={juego.portadaURL || "https://via.placeholder.com/150"}
         alt={juego.nombre}
@@ -21,5 +13,3 @@ function TarjetaJuego({ juego }) {
     </div>
   );
 }
-
-export default TarjetaJuego;

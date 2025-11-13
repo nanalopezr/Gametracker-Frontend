@@ -25,11 +25,27 @@ nav a {
   margin: 20px;
 }
 
-.tarjeta {
-  background: white;
-  padding: 15px;
+.tarjeta-juego {
+  background: #1f1f1f;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjeta-juego:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Opcional: grid de juegos más ordenado */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .formulario {
@@ -51,4 +67,40 @@ button {
 
 button:hover {
   background-color: #005fa3;
+}
+
+.tarjeta-juego {
+  background: #1f1f1f;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjeta-juego:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.juego-card {
+  background: #1e1e1e;
+  color: #f2f2f2;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.juego-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }

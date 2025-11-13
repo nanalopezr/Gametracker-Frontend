@@ -3,37 +3,63 @@ import JuegoList from "./components/JuegoList";
 import FormularioJuego from "./components/FormularioJuego";
 import FormularioResena from "./components/FormularioResena";
 import ListaResenas from "./components/ListaResenas";
+import "./App.css";
 
 function App() {
   const [juegos, setJuegos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [vista, setVista] = useState("biblioteca");
 
-  // 🔹 Cargar juegos desde el backend
+  // 🔍 Estados para filtros de búsqueda
+  const [busqueda, setBusqueda] = useState({
+    nombre: "",
+    plataforma: "",
+    estado: ""
+  });
+
+  // 🔹 Función para obtener juegos con filtros
+  const fetchJuegos = async (filtros = {}) => {
+    try {
+      setLoading(true);
+      let query = [];
+      if (filtros.nombre) query.push(`nombre=${encodeURIComponent(filtros.nombre)}`);
+      if (filtros.plataforma) query.push(`plataforma=${encodeURIComponent(filtros.plataforma)}`);
+      if (filtros.estado) query.push(`estado=${encodeURIComponent(filtros.estado)}`);
+      const queryString = query.length > 0 ? `?${query.join("&")}` : "";
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+
+      const res = await fetch(`http://localhost:3000/api/juegos${queryString}`, {
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+
+      if (!res.ok) throw new Error(`Error al cargar los juegos: ${res.status}`);
+      const data = await res.json();
+
+      console.log("✅ Juegos obtenidos del backend:", data);
+      setJuegos(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("❌ Error al cargar los juegos:", error.message);
+      setJuegos([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔹 Cargar juegos al inicio
   useEffect(() => {
-    const fetchJuegos = async () => {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000); // ⏱ 8s de límite
-
-        const res = await fetch("http://localhost:3000/api/juegos", { signal: controller.signal });
-        clearTimeout(timeout);
-
-        if (!res.ok) throw new Error(`Error al cargar los juegos: ${res.status}`);
-        const data = await res.json();
-
-        console.log("✅ Juegos obtenidos del backend:", data);
-        setJuegos(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error("❌ Error al cargar los juegos:", error.message);
-        setJuegos([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchJuegos();
   }, []);
+
+  // 🔍 Actualizar búsqueda en tiempo real
+  useEffect(() => {
+    const delaySearch = setTimeout(() => {
+      fetchJuegos(busqueda);
+    }, 400); // ⏱ espera 400ms antes de buscar (para evitar muchas peticiones)
+    return () => clearTimeout(delaySearch);
+  }, [busqueda]);
 
   return (
     <div
@@ -84,7 +110,7 @@ function App() {
       {/* 🔸 Mostrar la vista seleccionada */}
       {vista === "biblioteca" ? (
         <>
-          {/* 🕹️ Lista de juegos */}
+          {/* 🕹️ Lista de juegos con buscador */}
           <section
             style={{
               background: "#1E1E1E",
@@ -95,12 +121,63 @@ function App() {
             }}
           >
             <h2 style={{ color: "#00FFB9" }}>🎯 Juegos Disponibles</h2>
+
+            {/* 🔍 Buscador y filtros */}
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Buscar por nombre..."
+                value={busqueda.nombre}
+                onChange={(e) => setBusqueda({ ...busqueda, nombre: e.target.value })}
+                style={{
+                  padding: "8px",
+                  borderRadius: "6px",
+                  border: "1px solid #333",
+                  flex: "1",
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Filtrar por plataforma..."
+                value={busqueda.plataforma}
+                onChange={(e) => setBusqueda({ ...busqueda, plataforma: e.target.value })}
+                style={{
+                  padding: "8px",
+                  borderRadius: "6px",
+                  border: "1px solid #333",
+                  flex: "1",
+                }}
+              />
+              <select
+                value={busqueda.estado}
+                onChange={(e) => setBusqueda({ ...busqueda, estado: e.target.value })}
+                style={{
+                  padding: "8px",
+                  borderRadius: "6px",
+                  border: "1px solid #333",
+                }}
+              >
+                <option value="">Todos los estados</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Jugando">Jugando</option>
+                <option value="Completado">Completado</option>
+              </select>
+            </div>
+
+            {/* 📋 Resultados */}
             {loading ? (
               <p>Cargando juegos...</p>
             ) : juegos.length > 0 ? (
-              <JuegoList juegos={juegos} />
+              <JuegoList juegos={juegos} setJuegos={setJuegos} />
             ) : (
-              <p>No hay juegos registrados aún.</p>
+              <p>No se encontraron juegos con esos filtros 😢</p>
             )}
           </section>
 
@@ -131,7 +208,6 @@ function App() {
             }}
           >
             <h2 style={{ color: "#FF8C00" }}>📝 Crear Nueva Reseña</h2>
-            {/* ✅ Pasamos juegos como prop */}
             <FormularioResena juegos={juegos} />
           </section>
 
