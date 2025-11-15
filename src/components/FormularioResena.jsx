@@ -8,18 +8,17 @@ function FormularioResena() {
     autor: "",
   });
 
-  const [juegos, setJuegos] = useState([]); // Lista de juegos para el select
+  const [juegos, setJuegos] = useState([]); 
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState(null);
 
-  // 🔹 Cargar los juegos para poder seleccionar uno en la reseña
   useEffect(() => {
     const obtenerJuegos = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/juegos");
         if (!res.ok) throw new Error("Error al obtener los juegos");
         const data = await res.json();
-        setJuegos(Array.isArray(data) ? data : []); // Evita error si data no es arreglo
+        setJuegos(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("❌ Error al cargar juegos:", err);
         setError(err.message);
@@ -29,12 +28,10 @@ function FormularioResena() {
     obtenerJuegos();
   }, []);
 
-  // 🔹 Manejador de cambios del formulario
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Enviar reseña al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMensaje("");
@@ -77,7 +74,8 @@ function FormularioResena() {
       </h2>
 
       <form onSubmit={handleSubmit} style={{ display: "grid", gap: "12px" }}>
-        {/* 🔸 Selector de juego */}
+        
+        {/* 🔸 SELECT DE JUEGO (YA ENVÍA *NOMBRE*) */}
         <label>
           Juego:
           <select
@@ -96,9 +94,10 @@ function FormularioResena() {
             }}
           >
             <option value="">Selecciona un juego</option>
+
             {Array.isArray(juegos) &&
               juegos.map((j) => (
-                <option key={j._id} value={j._id}>
+                <option key={j._id} value={j.nombre}>
                   {j.nombre}
                 </option>
               ))}
@@ -127,7 +126,7 @@ function FormularioResena() {
           />
         </label>
 
-        {/* 🔸 Texto de reseña */}
+        {/* 🔸 Comentario */}
         <label>
           Reseña:
           <textarea
@@ -167,6 +166,7 @@ function FormularioResena() {
           />
         </label>
 
+        {/* 🔸 Botón */}
         <button
           type="submit"
           style={{
@@ -183,7 +183,6 @@ function FormularioResena() {
         </button>
       </form>
 
-      {/* Mensajes */}
       {mensaje && (
         <p style={{ color: "lightgreen", textAlign: "center", marginTop: "10px" }}>
           {mensaje}
