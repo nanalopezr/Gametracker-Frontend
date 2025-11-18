@@ -31,7 +31,6 @@ function ListaResenas() {
     cargarResenas();
   }, []);
 
-  // filtrado
   useEffect(() => {
     const esperar = setTimeout(() => {
       cargarResenas(busqueda);
@@ -39,7 +38,6 @@ function ListaResenas() {
     return () => clearTimeout(esperar);
   }, [busqueda]);
 
-  // ⭐ Estrellas visuales
   const renderEstrellas = (num) =>
     "⭐".repeat(num) + "✩".repeat(5 - num);
 
@@ -50,12 +48,12 @@ function ListaResenas() {
           color: "#91e0ebff",
           marginBottom: "20px",
           fontSize: "26px",
-          textShadow: "0 0 10px #8ec9d1ff",
+          textShadow: "0 0 10px #143438ff",
         }}
       >
+        ⭐ Reseñas de la comunidad
       </h2>
 
-      {/* BUSCADOR */}
       <input
         type="text"
         placeholder="Buscar por nombre del juego..."
@@ -66,7 +64,7 @@ function ListaResenas() {
           width: "100%",
           maxWidth: "450px",
           borderRadius: "12px",
-          border: "2px solid #355c7d",
+          border: "2px solid #00E0FF",
           background: "rgba(255,255,255,0.05)",
           backdropFilter: "blur(6px)",
           color: "white",
@@ -82,7 +80,6 @@ function ListaResenas() {
         <p style={{ opacity: 0.7 }}>No hay reseñas aún.</p>
       )}
 
-      {/* GRID DE RESEÑAS */}
       <div
         style={{
           display: "grid",
@@ -95,36 +92,35 @@ function ListaResenas() {
             key={r._id}
             style={{
               padding: "20px",
-              borderRadius: "15px",
-              background: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(8px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 0 12px rgba(0, 200, 255, 0.2)",
-              transition: "all 0.25s ease",
-              transform: "translateY(0px)",
+              borderRadius: "12px",
+              background: "#2A2A2A", // igual al de Estadísticas
+              border: "1px solid rgba(255,255,255,0.08)",
+              boxShadow: "0 0 10px rgba(0,0,0,0.4)",
+              transition: "transform 0.25s ease, box-shadow 0.25s ease",
+              transform: "scale(1)",
               opacity: 0,
               animation: "fadeIn 0.6s ease forwards",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 0 18px rgba(0, 200, 255, 0.55)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.boxShadow =
-                "0 0 12px rgba(0, 200, 255, 0.2)")
-            }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.03)";
+              e.currentTarget.style.boxShadow =
+                "0 0 16px rgba(255,255,255,0.25)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 0 10px rgba(0,0,0,0.4)";
+            }}
           >
-            {/* Título */}
             <h3
               style={{
-                color: "#8d5ab9ff", 
+                color: "#8d5ab9ff",
                 marginBottom: "8px",
               }}
             >
               🎮 {r.juego?.nombre || "Juego desconocido"}
             </h3>
 
-            {/* Estrellas */}
             <p
               style={{
                 fontSize: "26px",
@@ -136,17 +132,14 @@ function ListaResenas() {
               {renderEstrellas(r.puntuacion)}
             </p>
 
-            {/* Autor */}
             <p style={{ opacity: 0.8, marginBottom: "10px" }}>
               <strong>👤 Autor:</strong> {r.autor || "Anónimo"}
             </p>
 
-            {/* Texto */}
             <p style={{ lineHeight: "1.4", marginBottom: "12px" }}>
               {r.texto}
             </p>
 
-            {/* Fecha */}
             <p
               style={{
                 fontSize: "12px",
@@ -161,7 +154,6 @@ function ListaResenas() {
         ))}
       </div>
 
-      {/* Animación CSS */}
       <style>
         {`
           @keyframes fadeIn {

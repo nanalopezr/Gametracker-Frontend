@@ -71,7 +71,7 @@ function App() {
         padding: "30px",
       }}
     >
-      <h1 style={{ textAlign: "center", color: "#00ADB5", marginBottom: "25px" }}>
+      <h1 style={{ textAlign: "center", color: "#f67280", marginBottom: "25px" }}>
         🎮 GameTracker
       </h1>
 
@@ -95,7 +95,7 @@ function App() {
         <button
           onClick={() => setVista("resenas")}
           style={{
-            background: vista === "resenas" ? "#FF8C00" : "#333",
+            background: vista === "resenas" ? "#6A5ACD" : "#333",
             color: "white",
             padding: "10px 20px",
             margin: "0 10px",
@@ -111,7 +111,7 @@ function App() {
         <button
           onClick={() => setVista("estadisticas")}
           style={{
-            background: vista === "estadisticas" ? "#6A5ACD" : "#333",
+            background: vista === "estadisticas" ? "#c06c84" : "#333",
             color: "white",
             padding: "10px 20px",
             margin: "0 10px",
@@ -136,7 +136,7 @@ function App() {
               boxShadow: "0 0 10px rgba(0,0,0,0.4)",
             }}
           >
-            <h2 style={{ color: "#00FFB9" }}>🎯 Juegos Disponibles</h2>
+            <h2 style={{ color: "#91e0ebff" }}>🎯 Juegos Disponibles</h2>
 
             {/* Buscadores */}
             <div
@@ -205,10 +205,8 @@ function App() {
               borderRadius: "12px",
               padding: "20px",
               marginBottom: "30px",
-              boxShadow: "0 0 10px rgba(0,0,0,0.4)",
             }}
           >
-            <h2 style={{ color: "#00ADB5" }}>➕ Agregar nuevo juego</h2>
             <FormularioJuego />
           </section>
         </>
@@ -225,7 +223,6 @@ function App() {
               boxShadow: "0 0 10px rgba(0,0,0,0.4)",
             }}
           >
-            <h2 style={{ color: "#FF8C00" }}>📝 Crear Nueva Reseña</h2>
             <FormularioResena juegos={juegos} />
           </section>
 
@@ -237,7 +234,6 @@ function App() {
               boxShadow: "0 0 10px rgba(0,0,0,0.4)",
             }}
           >
-            <h2 style={{ color: "#FFD700" }}>⭐ Reseñas de Jugadores</h2>
             <ListaResenas />
           </section>
         </>

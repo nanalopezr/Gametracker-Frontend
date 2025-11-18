@@ -145,7 +145,7 @@ function JuegoList({ juegos, setJuegos }) {
             </>
           ) : (
             <>
-              <h3 style={{ color: "#00ADB5", marginBottom: "8px" }}>
+              <h3 style={{ color: "#C084FC", marginBottom: "8px" }}>
                 🎮 {juego.nombre}
               </h3>
               <p>
@@ -172,7 +172,7 @@ function JuegoList({ juegos, setJuegos }) {
                 <button
                   onClick={() => handleEditar(juego)}
                   style={{
-                    background: "#00ADB5",
+                    background: "#355c7d",
                     color: "white",
                     border: "none",
                     padding: "8px 12px",
@@ -186,7 +186,7 @@ function JuegoList({ juegos, setJuegos }) {
                 <button
                   onClick={() => handleEliminar(juego._id)}
                   style={{
-                    background: "#E74C3C",
+                    background: "#f67280",
                     color: "white",
                     border: "none",
                     padding: "8px 12px",

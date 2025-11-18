@@ -44,97 +44,149 @@ function FormularioJuego() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
+    <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
+        background: "rgba(20, 20, 20, 0.9)",
+        padding: "30px",
+        borderRadius: "16px",
+        maxWidth: "600px",
+        margin: "25px auto",
+        color: "#E6F7FF",
+        backdropFilter: "blur(8px)",
+        //border: "1px solid rgba(0, 225, 255, 0.25)",
       }}
     >
-      {/* Nombre */}
-      <label>Nombre del juego:</label>
-      <input
-        type="text"
-        name="nombre"
-        value={form.nombre}
-        onChange={handleChange}
-        placeholder="Ej: God of War"
-        required
-        style={inputStyle}
-      />
-
-      {/* Plataforma */}
-      <label>Plataforma:</label>
-      <input
-        type="text"
-        name="plataforma"
-        value={form.plataforma}
-        onChange={handleChange}
-        placeholder="Ej: PlayStation 5"
-        required
-        style={inputStyle}
-      />
-
-      {/* Portada */}
-      <label>URL de la portada:</label>
-      <input
-        type="url"
-        name="portadaURL"
-        value={form.portadaURL}
-        onChange={handleChange}
-        placeholder="https://..."
-        style={inputStyle}
-      />
-
-      {/* Estado */}
-      <label>Estado:</label>
-      <select
-        name="estado"
-        value={form.estado}
-        onChange={handleChange}
-        style={inputStyle}
+      <h2
+        style={{
+          color: "#91e0ebff",
+          textAlign: "center",
+          marginBottom: "20px",
+        }}
       >
-        <option value="Pendiente">Pendiente</option>
-        <option value="Jugando">Jugando</option>
-        <option value="Completado">Completado</option>
-      </select>
+        ➕ Agregar Nuevo Juego
+      </h2>
 
-      {/* Horas jugadas */}
-      <label>Horas jugadas:</label>
-      <input
-        type="number"
-        name="horasJugadas"
-        value={form.horasJugadas}
-        onChange={handleChange}
-        min="0"
-        placeholder="Ej: 12"
-        style={inputStyle}
-      />
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "14px",
+        }}
+      >
+        {/* Nombre */}
+        <label style={labelStyle}>Nombre del juego:</label>
+        <input
+          type="text"
+          name="nombre"
+          value={form.nombre}
+          onChange={handleChange}
+          placeholder="Ej: God of War"
+          required
+          style={inputStyle}
+        />
 
-      <button type="submit" style={buttonStyle}>
-        Agregar Juego
-      </button>
-    </form>
+        {/* Plataforma */}
+        <label style={labelStyle}>Plataforma:</label>
+        <input
+          type="text"
+          name="plataforma"
+          value={form.plataforma}
+          onChange={handleChange}
+          placeholder="Ej: PlayStation 5"
+          required
+          style={inputStyle}
+        />
+
+        {/* Portada */}
+        <label style={labelStyle}>URL de la portada:</label>
+        <input
+          type="url"
+          name="portadaURL"
+          value={form.portadaURL}
+          onChange={handleChange}
+          placeholder="https://..."
+          style={inputStyle}
+        />
+
+        {/* Estado */}
+        <label style={labelStyle}>Estado:</label>
+        <select
+          name="estado"
+          value={form.estado}
+          onChange={handleChange}
+          style={selectStyle}
+        >
+          <option value="Pendiente">Pendiente</option>
+          <option value="Jugando">Jugando</option>
+          <option value="Completado">Completado</option>
+        </select>
+
+        {/* Horas jugadas */}
+        <label style={labelStyle}>Horas jugadas:</label>
+        <input
+          type="number"
+          name="horasJugadas"
+          value={form.horasJugadas}
+          onChange={handleChange}
+          min="0"
+          placeholder="Ej: 12"
+          style={inputStyle}
+        />
+
+        <button type="submit" style={buttonStyle}>
+          ➕ Agregar Juego
+        </button>
+      </form>
+    </div>
   );
 }
 
+/* ⭐ Estilos reutilizables */
+const labelStyle = {
+  fontWeight: "bold",
+  color: "#8d5ab9ff",
+};
+
 const inputStyle = {
-  padding: "8px",
-  borderRadius: "5px",
-  border: "1px solid #444",
-  background: "#1e1e1e",
-  color: "#f2f2f2",
+  padding: "12px",
+  borderRadius: "10px",
+  border: "1px solid #00ADB5",
+  background: "#111",
+  color: "#E6F7FF",
+  outline: "none",
+  transition: "0.25s",
+};
+
+const selectStyle = {
+  padding: "12px",
+  borderRadius: "10px",
+  border: "1px solid #00ADB5",
+  background: "#111",
+  color: "#E6F7FF",
+  cursor: "pointer",
+  outline: "none",
+  transition: "0.25s",
 };
 
 const buttonStyle = {
-  background: "#00ADB5",
-  color: "white",
+  background: "#00E0FF",
+  color: "#000",
   border: "none",
-  padding: "10px",
-  borderRadius: "5px",
+  padding: "13px",
+  borderRadius: "12px",
   cursor: "pointer",
-  transition: "background 0.3s",
+  fontWeight: "bold",
+  fontSize: "1rem",
+  transition: "0.3s",
+  textShadow: "0 0 5px #fff",
 };
+
+/* Animación al pasar el mouse */
+buttonStyle.onMouseEnter = (e) =>
+  (e.target.style.boxShadow = "0 0 12px #00E0FF");
+
+buttonStyle.onMouseLeave = (e) =>
+  (e.target.style.boxShadow = "none");
 
 export default FormularioJuego;
