@@ -20,7 +20,6 @@ function ListaResenas() {
 
       const data = await res.json();
       setResenas(data);
-
     } catch (err) {
       setError(err.message);
     } finally {
@@ -28,12 +27,11 @@ function ListaResenas() {
     }
   };
 
-  // cargar todas
   useEffect(() => {
     cargarResenas();
   }, []);
 
-  // filtrar en tiempo real
+  // filtrado
   useEffect(() => {
     const esperar = setTimeout(() => {
       cargarResenas(busqueda);
@@ -41,16 +39,23 @@ function ListaResenas() {
     return () => clearTimeout(esperar);
   }, [busqueda]);
 
-  // ⭐ Estrellas
+  // ⭐ Estrellas visuales
   const renderEstrellas = (num) =>
-    "★".repeat(num) + "☆".repeat(5 - num);
+    "⭐".repeat(num) + "✩".repeat(5 - num);
 
   return (
     <div style={{ marginTop: "20px" }}>
-      <h2 style={{ color: "#00ADB5", marginBottom: "20px" }}>
-        ⭐ Reseñas de la comunidad
+      <h2
+        style={{
+          color: "#91e0ebff",
+          marginBottom: "20px",
+          fontSize: "26px",
+          textShadow: "0 0 10px #8ec9d1ff",
+        }}
+      >
       </h2>
 
+      {/* BUSCADOR */}
       <input
         type="text"
         placeholder="Buscar por nombre del juego..."
@@ -60,9 +65,10 @@ function ListaResenas() {
           padding: "12px",
           width: "100%",
           maxWidth: "450px",
-          borderRadius: "10px",
-          border: "2px solid #00ADB5",
-          background: "#1E1E1E",
+          borderRadius: "12px",
+          border: "2px solid #355c7d",
+          background: "rgba(255,255,255,0.05)",
+          backdropFilter: "blur(6px)",
           color: "white",
           marginBottom: "20px",
           fontSize: "16px",
@@ -76,52 +82,100 @@ function ListaResenas() {
         <p style={{ opacity: 0.7 }}>No hay reseñas aún.</p>
       )}
 
+      {/* GRID DE RESEÑAS */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "20px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "25px",
         }}
       >
         {resenas.map((r) => (
           <div
             key={r._id}
             style={{
-              background: "#222",
               padding: "20px",
-              borderRadius: "12px",
-              boxShadow: "0 0 10px rgba(0,0,0,0.4)",
-              transition: "transform 0.2s",
+              borderRadius: "15px",
+              background: "rgba(255,255,255,0.05)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 0 12px rgba(0, 200, 255, 0.2)",
+              transition: "all 0.25s ease",
+              transform: "translateY(0px)",
+              opacity: 0,
+              animation: "fadeIn 0.6s ease forwards",
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "scale(1.03)")
+              (e.currentTarget.style.boxShadow =
+                "0 0 18px rgba(0, 200, 255, 0.55)")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.transform = "scale(1)")
+              (e.currentTarget.style.boxShadow =
+                "0 0 12px rgba(0, 200, 255, 0.2)")
             }
           >
-            <h3 style={{ color: "#00ADB5", marginBottom: "8px" }}>
+            {/* Título */}
+            <h3
+              style={{
+                color: "#8d5ab9ff", 
+                marginBottom: "8px",
+              }}
+            >
               🎮 {r.juego?.nombre || "Juego desconocido"}
             </h3>
 
-            <p style={{ fontSize: "22px", color: "#FFD700", margin: "5px 0" }}>
+            {/* Estrellas */}
+            <p
+              style={{
+                fontSize: "26px",
+                color: "#6c5b7b",
+                margin: "5px 0",
+                textShadow: "0 0 5px #355c7d",
+              }}
+            >
               {renderEstrellas(r.puntuacion)}
             </p>
 
+            {/* Autor */}
             <p style={{ opacity: 0.8, marginBottom: "10px" }}>
-              <strong>Autor:</strong> {r.autor || "Anónimo"}
+              <strong>👤 Autor:</strong> {r.autor || "Anónimo"}
             </p>
 
+            {/* Texto */}
             <p style={{ lineHeight: "1.4", marginBottom: "12px" }}>
               {r.texto}
             </p>
 
-            <p style={{ fontSize: "12px", opacity: 0.6 }}>
-              Fecha: {new Date(r.createdAt).toLocaleDateString()}
+            {/* Fecha */}
+            <p
+              style={{
+                fontSize: "12px",
+                opacity: 0.6,
+                borderTop: "1px solid rgba(255,255,255,0.1)",
+                paddingTop: "8px",
+              }}
+            >
+              📅 {new Date(r.createdAt).toLocaleDateString()}
             </p>
           </div>
         ))}
       </div>
+
+      {/* Animación CSS */}
+      <style>
+        {`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }

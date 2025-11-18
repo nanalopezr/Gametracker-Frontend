@@ -3,6 +3,7 @@ import JuegoList from "./components/JuegoList";
 import FormularioJuego from "./components/FormularioJuego";
 import FormularioResena from "./components/FormularioResena";
 import ListaResenas from "./components/ListaResenas";
+import Estadisticas from "./components/Estadisticas";
 import "./App.css";
 
 function App() {
@@ -10,14 +11,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [vista, setVista] = useState("biblioteca");
 
-  // 🔍 Estados para filtros de búsqueda
   const [busqueda, setBusqueda] = useState({
     nombre: "",
     plataforma: "",
     estado: ""
   });
 
-  // 🔹 Función para obtener juegos con filtros
+  // Obtener juegos (con filtros)
   const fetchJuegos = async (filtros = {}) => {
     try {
       setLoading(true);
@@ -33,32 +33,32 @@ function App() {
       const res = await fetch(`http://localhost:3000/api/juegos${queryString}`, {
         signal: controller.signal,
       });
+
       clearTimeout(timeout);
 
-      if (!res.ok) throw new Error(`Error al cargar los juegos: ${res.status}`);
-      const data = await res.json();
+      if (!res.ok) throw new Error(`Error al cargar juegos: ${res.status}`);
 
-      console.log("✅ Juegos obtenidos del backend:", data);
+      const data = await res.json();
       setJuegos(Array.isArray(data) ? data : []);
     } catch (error) {
-      console.error("❌ Error al cargar los juegos:", error.message);
+      console.error("Error:", error.message);
       setJuegos([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔹 Cargar juegos al inicio
+  // Cargar juegos al iniciar
   useEffect(() => {
     fetchJuegos();
   }, []);
 
-  // 🔍 Actualizar búsqueda en tiempo real
+  // Actualizar filtros en tiempo real
   useEffect(() => {
-    const delaySearch = setTimeout(() => {
+    const delay = setTimeout(() => {
       fetchJuegos(busqueda);
-    }, 400); // ⏱ espera 400ms antes de buscar (para evitar muchas peticiones)
-    return () => clearTimeout(delaySearch);
+    }, 400);
+    return () => clearTimeout(delay);
   }, [busqueda]);
 
   return (
@@ -75,7 +75,7 @@ function App() {
         🎮 GameTracker
       </h1>
 
-      {/* 🔸 Botones de navegación */}
+      {/* Botones de navegación */}
       <div style={{ textAlign: "center", marginBottom: "20px" }}>
         <button
           onClick={() => setVista("biblioteca")}
@@ -91,6 +91,7 @@ function App() {
         >
           Biblioteca
         </button>
+
         <button
           onClick={() => setVista("resenas")}
           style={{
@@ -105,12 +106,27 @@ function App() {
         >
           Reseñas
         </button>
+
+        {/* 🔥 Nuevo botón de Estadísticas */}
+        <button
+          onClick={() => setVista("estadisticas")}
+          style={{
+            background: vista === "estadisticas" ? "#6A5ACD" : "#333",
+            color: "white",
+            padding: "10px 20px",
+            margin: "0 10px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Estadísticas
+        </button>
       </div>
 
-      {/* 🔸 Mostrar la vista seleccionada */}
-      {vista === "biblioteca" ? (
+      {/* Vistas */}
+      {vista === "biblioteca" && (
         <>
-          {/* 🕹️ Lista de juegos con buscador */}
           <section
             style={{
               background: "#1E1E1E",
@@ -122,7 +138,7 @@ function App() {
           >
             <h2 style={{ color: "#00FFB9" }}>🎯 Juegos Disponibles</h2>
 
-            {/* 🔍 Buscador y filtros */}
+            {/* Buscadores */}
             <div
               style={{
                 marginBottom: "20px",
@@ -133,7 +149,7 @@ function App() {
             >
               <input
                 type="text"
-                placeholder="Buscar por nombre..."
+                placeholder="Buscar por nombre…"
                 value={busqueda.nombre}
                 onChange={(e) => setBusqueda({ ...busqueda, nombre: e.target.value })}
                 style={{
@@ -143,9 +159,10 @@ function App() {
                   flex: "1",
                 }}
               />
+
               <input
                 type="text"
-                placeholder="Filtrar por plataforma..."
+                placeholder="Filtrar por plataforma…"
                 value={busqueda.plataforma}
                 onChange={(e) => setBusqueda({ ...busqueda, plataforma: e.target.value })}
                 style={{
@@ -155,6 +172,7 @@ function App() {
                   flex: "1",
                 }}
               />
+
               <select
                 value={busqueda.estado}
                 onChange={(e) => setBusqueda({ ...busqueda, estado: e.target.value })}
@@ -171,17 +189,16 @@ function App() {
               </select>
             </div>
 
-            {/* 📋 Resultados */}
             {loading ? (
-              <p>Cargando juegos...</p>
+              <p>Cargando juegos…</p>
             ) : juegos.length > 0 ? (
               <JuegoList juegos={juegos} setJuegos={setJuegos} />
             ) : (
-              <p>No se encontraron juegos con esos filtros 😢</p>
+              <p>No se encontraron juegos 😢</p>
             )}
           </section>
 
-          {/* ➕ Formulario para agregar juego */}
+          {/* Agregar juego */}
           <section
             style={{
               background: "#1E1E1E",
@@ -195,9 +212,10 @@ function App() {
             <FormularioJuego />
           </section>
         </>
-      ) : (
+      )}
+
+      {vista === "resenas" && (
         <>
-          {/* 📝 Crear reseña */}
           <section
             style={{
               background: "#1E1E1E",
@@ -211,7 +229,6 @@ function App() {
             <FormularioResena juegos={juegos} />
           </section>
 
-          {/* ⭐ Lista de reseñas */}
           <section
             style={{
               background: "#1E1E1E",
@@ -224,6 +241,11 @@ function App() {
             <ListaResenas />
           </section>
         </>
+      )}
+
+      {/* 🔥 Nueva vista: estadísticas */}
+      {vista === "estadisticas" && (
+        <Estadisticas juegos={juegos} />
       )}
     </div>
   );

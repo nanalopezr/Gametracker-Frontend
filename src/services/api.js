@@ -16,3 +16,8 @@ export const addJuego = async (nuevoJuego) => {
   });
   return await res.json();
 };
+
+export async function getJuegoFavorito() {
+  const res = await fetch("http://localhost:4000/api/resenas/estadisticas/favorito");
+  return res.json();
+}
