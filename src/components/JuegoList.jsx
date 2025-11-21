@@ -88,7 +88,7 @@ function JuegoList({ juegos, setJuegos }) {
           <div
             key={juego._id}
             style={{
-              background: "#1e1e1e",
+              background: "#2b2e54",
               color: "#f2f2f2",
               borderRadius: "10px",
               padding: "16px",
@@ -188,7 +188,7 @@ function JuegoList({ juegos, setJuegos }) {
         >
           <div
             style={{
-              background: "#1f1f1f",
+              background: "#0a1329ff",
               padding: "25px",
               borderRadius: "12px",
               width: "350px",
@@ -241,7 +241,7 @@ function JuegoList({ juegos, setJuegos }) {
               <button
                 onClick={handleGuardar}
                 style={{
-                  background: "#00ADB5",
+                  background: "#00b59dff",
                   color: "white",
                   padding: "8px 12px",
                   border: "none",
@@ -289,7 +289,7 @@ function JuegoList({ juegos, setJuegos }) {
         >
           <div
             style={{
-              background: "#1f1f1f",
+              background: "#0a1329ff",
               padding: "25px",
               borderRadius: "12px",
               width: "330px",

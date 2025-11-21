@@ -65,13 +65,12 @@ function App() {
     <div
       style={{
         fontFamily: "Poppins, sans-serif",
-        background: "#121212",
-        color: "#f2f2f2",
+        background: "#0a1329ff",
         minHeight: "100vh",
         padding: "30px",
       }}
     >
-      <h1 style={{ textAlign: "center", color: "#f67280", marginBottom: "25px" }}>
+      <h1 style={{ textAlign: "center", color: "#b43ce4", marginBottom: "25px" }}>
         🎮 GameTracker
       </h1>
 
@@ -107,7 +106,7 @@ function App() {
           Reseñas
         </button>
 
-        {/* 🔥 Nuevo botón de Estadísticas */}
+        {/* Nuevo botón de Estadísticas */}
         <button
           onClick={() => setVista("estadisticas")}
           style={{
@@ -129,14 +128,14 @@ function App() {
         <>
           <section
             style={{
-              background: "#1E1E1E",
+              background: "#142550ff",
               borderRadius: "12px",
               padding: "20px",
               marginBottom: "30px",
               boxShadow: "0 0 10px rgba(0,0,0,0.4)",
             }}
           >
-            <h2 style={{ color: "#91e0ebff" }}>🎯 Juegos Disponibles</h2>
+            <h2 style={{ color: "#adb4e4" }}>🎯 Juegos Disponibles</h2>
 
             {/* Buscadores */}
             <div
@@ -201,7 +200,7 @@ function App() {
           {/* Agregar juego */}
           <section
             style={{
-              background: "#1E1E1E",
+              background: "#142550ff",
               borderRadius: "12px",
               padding: "20px",
               marginBottom: "30px",
@@ -216,7 +215,7 @@ function App() {
         <>
           <section
             style={{
-              background: "#1E1E1E",
+              background: "#142550ff",
               borderRadius: "12px",
               padding: "20px",
               marginBottom: "30px",
@@ -228,7 +227,7 @@ function App() {
 
           <section
             style={{
-              background: "#1E1E1E",
+              background: "#142550ff",
               borderRadius: "12px",
               padding: "20px",
               boxShadow: "0 0 10px rgba(0,0,0,0.4)",

@@ -29,7 +29,7 @@ function FormularioJuego() {
 
       if (!res.ok) throw new Error("Error al agregar el juego");
 
-      alert("✅ Juego agregado con éxito");
+      alert("Juego agregado con éxito");
       setForm({
         nombre: "",
         plataforma: "",
@@ -38,7 +38,7 @@ function FormularioJuego() {
         horasJugadas: 0,
       });
     } catch (err) {
-      console.error("❌ Error:", err);
+      console.error("Error:", err);
       alert("Hubo un problema al agregar el juego.");
     }
   };
@@ -46,19 +46,18 @@ function FormularioJuego() {
   return (
     <div
       style={{
-        background: "rgba(20, 20, 20, 0.9)",
+        background: "#2b2e54",
         padding: "30px",
         borderRadius: "16px",
         maxWidth: "600px",
         margin: "25px auto",
         color: "#E6F7FF",
         backdropFilter: "blur(8px)",
-        //border: "1px solid rgba(0, 225, 255, 0.25)",
       }}
     >
       <h2
         style={{
-          color: "#91e0ebff",
+          color: "#adb4e4",
           textAlign: "center",
           marginBottom: "20px",
         }}
@@ -142,17 +141,17 @@ function FormularioJuego() {
   );
 }
 
-/* ⭐ Estilos reutilizables */
+/* Estilos reutilizables */
 const labelStyle = {
   fontWeight: "bold",
-  color: "#8d5ab9ff",
+  color: "#C084FC",
 };
 
 const inputStyle = {
   padding: "12px",
   borderRadius: "10px",
   border: "1px solid #00ADB5",
-  background: "#111",
+  background: "#2b2e54",
   color: "#E6F7FF",
   outline: "none",
   transition: "0.25s",
@@ -162,7 +161,7 @@ const selectStyle = {
   padding: "12px",
   borderRadius: "10px",
   border: "1px solid #00ADB5",
-  background: "#111",
+  background: "#2b2e54",
   color: "#E6F7FF",
   cursor: "pointer",
   outline: "none",
@@ -180,13 +179,7 @@ const buttonStyle = {
   fontSize: "1rem",
   transition: "0.3s",
   textShadow: "0 0 5px #fff",
+  
 };
-
-/* Animación al pasar el mouse */
-buttonStyle.onMouseEnter = (e) =>
-  (e.target.style.boxShadow = "0 0 12px #00E0FF");
-
-buttonStyle.onMouseLeave = (e) =>
-  (e.target.style.boxShadow = "none");
 
 export default FormularioJuego;

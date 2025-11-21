@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*/*import React, { useEffect, useState } from "react";
 import { getJuegos } from "../services/api";
 import TarjetaJuego from "../components/TarjetaJuego";
 
@@ -18,7 +18,7 @@ export default function BibliotecaJuegos() {
     <div>
       <h1>🎮 Mi Biblioteca de Juegos</h1>
 
-      {/* Filtro */}
+      {/* Filtro }
       <div style={{ margin: "20px 0" }}>
         <label>Filtrar por género: </label>
         <select value={genero} onChange={(e) => setGenero(e.target.value)}>
@@ -33,7 +33,7 @@ export default function BibliotecaJuegos() {
         </select>
       </div>
 
-      {/* Lista de juegos */}
+      {/* Lista de juegos }
       <div className="grid">
         {juegos.length > 0 ? (
           juegos.map((juego) => (

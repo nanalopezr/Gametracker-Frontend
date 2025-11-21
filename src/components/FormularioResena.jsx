@@ -20,7 +20,7 @@ function FormularioResena() {
         const data = await res.json();
         setJuegos(Array.isArray(data) ? data : []);
       } catch (err) {
-        console.error("❌ Error al cargar juegos:", err);
+        console.error("Error al cargar juegos:", err);
         setError(err.message);
       }
     };
@@ -47,11 +47,11 @@ function FormularioResena() {
       if (!res.ok) throw new Error("Error al crear la reseña");
 
       const data = await res.json();
-      console.log("✅ Reseña creada:", data);
-      setMensaje("🎉 Reseña creada exitosamente!");
+      console.log("Reseña creada:", data);
+      setMensaje("Reseña creada exitosamente!");
       setForm({ juego: "", puntuacion: "", texto: "", autor: "" });
     } catch (err) {
-      console.error("❌ Error en el envío:", err);
+      console.error("Error en el envío:", err);
       setError("Hubo un problema al enviar la reseña.");
     }
   };
@@ -59,7 +59,7 @@ function FormularioResena() {
   return (
     <div
       style={{
-        background: "rgba(30, 30, 30, 0.9)",
+        background: "#2b2e54",
         color: "#f2f2f2",
         padding: "28px",
         borderRadius: "16px",
@@ -97,7 +97,7 @@ function FormularioResena() {
               borderRadius: "10px",
               border: "1px solid #00ADB5",
               marginTop: "6px",
-              background: "#111",
+              background: "#2b2e54",
               color: "#E6F7FF",
               fontWeight: "bold",
               cursor: "pointer",
@@ -106,7 +106,7 @@ function FormularioResena() {
           >
             <option
               value=""
-              style={{ background: "#1E1E1E", color: "#A3A3A3" }}
+              style={{ background: "#2b2e54", color: "#A3A3A3" }}
             >
               Selecciona un juego
             </option>
@@ -117,7 +117,7 @@ function FormularioResena() {
                   key={j._id}
                   value={j.nombre}
                   style={{
-                    background: "#1A1A1A",
+                    background: "#2b2e54",
                     color: "#E6F7FF",
                     padding: "10px",
                   }}
@@ -144,7 +144,7 @@ function FormularioResena() {
               padding: "12px",
               borderRadius: "10px",
               border: "1px solid #00ADB5",
-              background: "#111",
+              background: "#2b2e54",
               color: "#E6F7FF",
             }}
           />
@@ -164,7 +164,7 @@ function FormularioResena() {
               padding: "12px",
               borderRadius: "10px",
               border: "1px solid #00ADB5",
-              background: "#111",
+              background: "#2b2e54",
               color: "#E6F7FF",
               resize: "none",
             }}
@@ -185,7 +185,7 @@ function FormularioResena() {
               padding: "12px",
               borderRadius: "10px",
               border: "1px solid #00ADB5",
-              background: "#111",
+              background: "#2b2e54",
               color: "#E6F7FF",
             }}
           />

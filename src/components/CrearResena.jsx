@@ -14,7 +14,7 @@ function CrearResena() {
     fetch("http://localhost:3000/api/juegos")
       .then((res) => res.json())
       .then((data) => setJuegos(data))
-      .catch(() => setMensaje("❌ Error al cargar juegos"));
+      .catch(() => setMensaje("Error al cargar juegos"));
   }, []);
 
   // Cargar reseñas
@@ -22,7 +22,7 @@ function CrearResena() {
     fetch("http://localhost:3000/api/resenas")
       .then((res) => res.json())
       .then((data) => setResenas(data))
-      .catch(() => setMensaje("❌ Error al cargar reseñas"));
+      .catch(() => setMensaje("Error al cargar reseñas"));
   }, []);
 
   // Enviar reseña
@@ -36,7 +36,7 @@ function CrearResena() {
     });
 
     if (respuesta.ok) {
-      setMensaje("✅ Reseña creada con éxito");
+      setMensaje("Reseña creada");
       setTexto("");
       setAutor("");
       setPuntuacion(1);
@@ -44,7 +44,7 @@ function CrearResena() {
       const nuevas = await fetch("http://localhost:3000/api/resenas");
       setResenas(await nuevas.json());
     } else {
-      setMensaje("❌ Error al crear la reseña");
+      setMensaje("Error al crear la reseña");
     }
   };
 

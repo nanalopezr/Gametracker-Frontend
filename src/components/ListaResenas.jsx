@@ -6,11 +6,11 @@ function ListaResenas() {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
 
-  // ----------- ESTADOS PARA EDITAR ------------
+  //  ESTADOS PARA EDITAR 
   const [modalEditar, setModalEditar] = useState(false);
   const [resenaActual, setResenaActual] = useState(null);
 
-  // ----------- ESTADOS PARA ELIMINAR ------------
+  //  ESTADOS PARA ELIMINAR 
   const [confirmarEliminar, setConfirmarEliminar] = useState(false);
   const [idAEliminar, setIdAEliminar] = useState(null);
 
@@ -48,9 +48,7 @@ function ListaResenas() {
 
   const renderEstrellas = (num) => "⭐".repeat(num) + "✩".repeat(5 - num);
 
-  // ------------------------------------------------------------------
-  // 🟣 ABRIR MODAL DE EDICIÓN
-  // ------------------------------------------------------------------
+  // ABRIR MODAL DE EDICIÓN
   const abrirModalEditar = (resena) => {
     setResenaActual(resena);
     setModalEditar(true);
@@ -61,9 +59,7 @@ function ListaResenas() {
     setResenaActual(null);
   };
 
-  // ------------------------------------------------------------------
-  // 🟦 GUARDAR CAMBIOS DE EDICIÓN
-  // ------------------------------------------------------------------
+  // GUARDAR CAMBIOS DE EDICIÓN
   const guardarEdicion = async () => {
   try {
     const body = {
@@ -91,10 +87,7 @@ function ListaResenas() {
   }
 };
 
-
-  // ------------------------------------------------------------------
-  // 🔴 CONFIRMAR ELIMINAR
-  // ------------------------------------------------------------------
+  // CONFIRMAR ELIMINAR
   const solicitarEliminar = (id) => {
     setIdAEliminar(id);
     setConfirmarEliminar(true);
@@ -113,7 +106,7 @@ function ListaResenas() {
       setIdAEliminar(null);
       cargarResenas();
     } catch (err) {
-      alert("❌ " + err.message);
+      alert(err.message);
     }
   };
 
@@ -125,7 +118,7 @@ function ListaResenas() {
           color: "#91e0ebff",
           marginBottom: "20px",
           fontSize: "26px",
-          textShadow: "0 0 10px #143438ff",
+          textShadow: "0 0 10px #00E0FF",
         }}
       >
         ⭐ Reseñas de la comunidad
@@ -143,9 +136,8 @@ function ListaResenas() {
           maxWidth: "450px",
           borderRadius: "12px",
           border: "2px solid #00E0FF",
-          background: "rgba(255,255,255,0.05)",
+          background: "#0e2635ff",
           backdropFilter: "blur(6px)",
-          color: "white",
           marginBottom: "20px",
           fontSize: "16px",
         }}
@@ -170,7 +162,7 @@ function ListaResenas() {
         {resenas.map((r) => (
           <div key={r._id} className="resena-card">
             {/* TÍTULO */}
-            <h3 style={{ color: "#8d5ab9ff", marginBottom: "8px" }}>
+            <h3 style={{ color: "#C084FC", marginBottom: "8px" }}>
               🎮 {r.juego?.nombre || "Juego desconocido"}
             </h3>
 
@@ -187,12 +179,14 @@ function ListaResenas() {
             </p>
 
             {/* AUTOR */}
-            <p style={{ opacity: 0.8, marginBottom: "10px" }}>
+            <p style={{ opacity: 0.8, marginBottom: "10px", color: "#a3dce4ff" }}>
               <strong>👤 Autor:</strong> {r.autor || "Anónimo"}
             </p>
 
             {/* TEXTO */}
-            <p style={{ lineHeight: "1.4", marginBottom: "12px" }}>
+            <p style={{ lineHeight: "1.4", marginBottom: "12px", 
+              color: "#91e0ebff",
+            }}>
               {r.texto}
             </p>
 
@@ -203,6 +197,7 @@ function ListaResenas() {
                 borderTop: "1px solid rgba(255,255,255,0.1)",
                 paddingTop: "8px",
                 marginBottom: "10px",
+                color: "#91e0ebff",
               }}
             >
               📅 {new Date(r.createdAt).toLocaleDateString()}
@@ -220,7 +215,7 @@ function ListaResenas() {
                 onClick={() => abrirModalEditar(r)}
                 style={{
                   background: "#355c7d",
-                  color: "#000",
+                  color: "white",
                   border: "none",
                   padding: "8px 12px",
                   borderRadius: "8px",
@@ -250,9 +245,7 @@ function ListaResenas() {
         ))}
       </div>
 
-      {/* ================================================================================= */}
       {/* =============================== MODAL EDITAR =================================== */}
-      {/* ================================================================================= */}
       {modalEditar && (
         <div style={modalFondo}>
           <div style={modalCaja}>
@@ -296,9 +289,7 @@ function ListaResenas() {
         </div>
       )}
 
-      {/* ================================================================================= */}
       {/* =========================== MODAL CONFIRMAR ELIMINACIÓN ========================= */}
-      {/* ================================================================================= */}
       {confirmarEliminar && (
         <div style={modalFondo}>
           <div style={modalCaja}>
@@ -330,9 +321,9 @@ function ListaResenas() {
     .resena-card {
       padding: 20px;
       border-radius: 12px;
-      background: #2A2A2A;
+      background: #2b2e54;
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      box-shadow: 0 0 10px #1d455cff;
       transition: 0.25s;
       opacity: 0;
       animation: fadeIn 0.6s ease forwards;
@@ -367,7 +358,7 @@ const modalFondo = {
 };
 
 const modalCaja = {
-  background: "#2b2a33",
+  background: "#0a1329ff",
   padding: "25px",
   borderRadius: "12px",
   width: "90%",
@@ -381,7 +372,7 @@ const inputModal = {
   padding: "10px",
   margin: "8px 0 15px 0",
   borderRadius: "8px",
-  background: "#111",
+  background: "#0f1c3fff",
   border: "1px solid #555",
   color: "white",
 };

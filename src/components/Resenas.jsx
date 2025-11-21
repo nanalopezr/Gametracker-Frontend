@@ -10,32 +10,32 @@ function Resenas() {
     autor: ""
   });
 
-  // ✅ Cargar reseñas existentes
+  // Cargar reseñas existentes
   const obtenerResenas = async () => {
     const res = await fetch("http://localhost:3000/api/resenas");
     const data = await res.json();
     setResenas(data);
   };
 
-  // ✅ Cargar juegos disponibles
+  // Cargar juegos disponibles
   const obtenerJuegos = async () => {
     const res = await fetch("http://localhost:3000/api/juegos");
     const data = await res.json();
     setJuegos(data);
   };
 
-  // ✅ useEffect para cargar datos al montar
+  // useEffect para cargar datos al montar
   useEffect(() => {
     obtenerResenas();
     obtenerJuegos();
   }, []);
 
-  // ✅ Manejar cambios en el formulario
+  // Manejar cambios en el formulario
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // ✅ Enviar reseña nueva
+  // Enviar reseña nueva
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,11 +47,11 @@ function Resenas() {
 
       if (!res.ok) throw new Error("Error al crear reseña");
 
-      alert("✅ Reseña creada con éxito");
+      alert("Reseña creada con éxito");
       setForm({ juego: "", puntuacion: "", texto: "", autor: "" });
       obtenerResenas(); // Recargar lista
     } catch (error) {
-      alert("❌ No se pudo crear la reseña");
+      alert("No se pudo crear la reseña");
       console.error(error);
     }
   };
@@ -60,7 +60,7 @@ function Resenas() {
     <div style={{ padding: "20px" }}>
       <h1>🎮 Reseñas de Juegos</h1>
 
-      {/* 📋 Lista de reseñas */}
+      {/* Lista de reseñas */}
       <h2>📚 Reseñas existentes</h2>
       {resenas.length === 0 ? (
         <p>No hay reseñas aún.</p>
@@ -78,7 +78,7 @@ function Resenas() {
         </ul>
       )}
 
-      {/* 📝 Formulario de reseña */}
+      {/* Formulario de reseña */}
       <h2>📝 Escribir una nueva reseña</h2>
       <form onSubmit={handleSubmit}>
         <label>Juego:</label>
