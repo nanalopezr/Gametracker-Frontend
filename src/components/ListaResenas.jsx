@@ -369,8 +369,8 @@ const modalCaja = {
 
 const inputModal = {
   width: "100%",
-  padding: "10px",
-  margin: "8px 0 15px 0",
+  padding: "8px",
+  margin: "8px 5px 15px 0",
   borderRadius: "8px",
   background: "#0f1c3fff",
   border: "1px solid #555",

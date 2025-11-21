@@ -12,3 +12,60 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
+.grid-juegos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+} 
+.caja-uniforme {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #00ADB5;
+  background: #2b2e54;
+  color: #E6F7FF;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-top: 8px;
+}
+/* Estilos reutilizables */
+.labelStyle = {
+  fontWeight: "bold",
+  color: "#C084FC",
+};
+
+const inputStyle = {
+  padding: "12px",
+  borderRadius: "10px",
+  border: "1px solid #00ADB5",
+  background: "#2b2e54",
+  color: "#E6F7FF",
+  outline: "none",
+  transition: "0.25s",
+};
+
+const selectStyle = {
+  padding: "12px",
+  borderRadius: "10px",
+  border: "1px solid #00ADB5",
+  background: "#2b2e54",
+  color: "#E6F7FF",
+  cursor: "pointer",
+  outline: "none",
+  transition: "0.25s",
+};
+
+const buttonStyle = {
+  background: "#00E0FF",
+  color: "#000",
+  border: "none",
+  padding: "13px",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontWeight: "bold",
+  fontSize: "1rem",
+  transition: "0.3s",
+  textShadow: "0 0 5px #fff",
+  
+};

@@ -81,28 +81,17 @@ function FormularioResena() {
         📝 Crear Reseña
       </h2>
 
-      <form onSubmit={handleSubmit} style={{ display: "grid", gap: "16px" }}>
+      <form onSubmit={handleSubmit} style={{ display: "grid", gap: "14px" }}>
 
         {/* SELECT */}
         <label style={{ fontWeight: "bold", color: "#C084FC" }}>
           Juego:
           <select
+            className="caja-uniforme caja-uniforme-select"
             name="juego"
             value={form.juego}
             onChange={handleChange}
             required
-            style={{
-              width: "100%",
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid #00ADB5",
-              marginTop: "6px",
-              background: "#2b2e54",
-              color: "#E6F7FF",
-              fontWeight: "bold",
-              cursor: "pointer",
-              transition: "0.2s",
-            }}
           >
             <option
               value=""
@@ -132,6 +121,7 @@ function FormularioResena() {
         <label style={{ fontWeight: "bold", color: "#C084FC" }}>
           Puntuación (1-5):
           <input
+            className="caja-uniforme caja-uniforme-select"
             type="number"
             name="puntuacion"
             value={form.puntuacion}
@@ -139,14 +129,6 @@ function FormularioResena() {
             min="1"
             max="5"
             required
-            style={{
-              width: "100%",
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid #00ADB5",
-              background: "#2b2e54",
-              color: "#E6F7FF",
-            }}
           />
         </label>
 
@@ -154,20 +136,12 @@ function FormularioResena() {
         <label style={{ fontWeight: "bold", color: "#C084FC" }}>
           Reseña:
           <textarea
+            className="caja-uniforme caja-uniforme-textarea"
             name="texto"
             value={form.texto}
             onChange={handleChange}
             required
             rows="4"
-            style={{
-              width: "100%",
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid #00ADB5",
-              background: "#2b2e54",
-              color: "#E6F7FF",
-              resize: "none",
-            }}
           />
         </label>
 
@@ -175,19 +149,12 @@ function FormularioResena() {
         <label style={{ fontWeight: "bold", color: "#C084FC" }}>
           Autor:
           <input
+            className="caja-uniforme caja-uniforme-select"
             type="text"
             name="autor"
             value={form.autor}
             onChange={handleChange}
             placeholder="Tu nombre (opcional)"
-            style={{
-              width: "100%",
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid #00ADB5",
-              background: "#2b2e54",
-              color: "#E6F7FF",
-            }}
           />
         </label>
 
