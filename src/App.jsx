@@ -106,7 +106,7 @@ function App() {
           Reseñas
         </button>
 
-        {/* Nuevo botón de Estadísticas */}
+        {/* botón de Estadísticas */}
         <button
           onClick={() => setVista("estadisticas")}
           style={{
@@ -238,7 +238,7 @@ function App() {
         </>
       )}
 
-      {/* 🔥 Nueva vista: estadísticas */}
+      {/* estadísticas */}
       {vista === "estadisticas" && (
         <Estadisticas juegos={juegos} />
       )}
