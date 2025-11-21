@@ -241,7 +241,7 @@ function JuegoList({ juegos, setJuegos }) {
               <button
                 onClick={handleGuardar}
                 style={{
-                  background: "#00b59dff",
+                  background: "#67b8adff",
                   color: "white",
                   padding: "8px 12px",
                   border: "none",
@@ -262,6 +262,7 @@ function JuegoList({ juegos, setJuegos }) {
                   border: "none",
                   borderRadius: "5px",
                   cursor: "pointer",
+                  marginRight: "8px",
                 }}
               >
                 Cancelar
