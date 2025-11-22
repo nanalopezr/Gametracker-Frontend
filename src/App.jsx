@@ -238,7 +238,7 @@ function App() {
         </>
       )}
 
-      {/* estadísticas */}
+      {/* Nueva vista: estadísticas */}
       {vista === "estadisticas" && (
         <Estadisticas juegos={juegos} />
       )}
