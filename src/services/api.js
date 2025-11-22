@@ -1,5 +1,5 @@
 // src/services/api.js
-const API_URL = "http://localhost:3000/api"; // tu backend
+const API_URL = "http://localhost:3000/api"; //backend
 
 // Obtener todos los juegos
 export const getJuegos = async () => {
